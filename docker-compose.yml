@@ -1,0 +1,13 @@
+services:
+  mysql:
+    build: ./mysql/
+    image: mysql:8.0.33-debian
+    restart: always
+    env_file: ./mysql/.env_file
+    container_name: mysql8_container
+    volumes:
+      - ./mysql/init_data:/docker-entrypoint-initdb.d # 初回データ実行
+    command: --default-authentication-plugin=mysql_native_password # 認証方式を8以前のものに
+
+    ports:
+      - 33068:3306
